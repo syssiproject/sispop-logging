@@ -1,6 +1,6 @@
 #pragma once
 
-// Header for actual log statements such as oxen::log::info(...) and so on.
+// Header for actual log statements such as sispop::log::info(...) and so on.
 
 #include <memory>
 
@@ -15,7 +15,7 @@
 #include "log/internal.hpp"
 #include "log/catlogger.hpp"
 
-namespace oxen::log {
+namespace sispop::log {
 
 using logger_ptr = std::shared_ptr<spdlog::logger>;
 
@@ -36,7 +36,7 @@ struct trace {
           [[maybe_unused]] T&&... args,
           [[maybe_unused]] const slns::source_location& location =
                   slns::source_location::current()) {
-#if defined(NDEBUG) && !defined(OXEN_LOGGING_RELEASE_TRACE)
+#if defined(NDEBUG) && !defined(SISPOP_LOGGING_RELEASE_TRACE)
         // Using [[maybe_unused]] on the *first* ctor argument breaks gcc 8/9
         (void)cat_logger;
 #else
@@ -51,7 +51,7 @@ struct trace {
           [[maybe_unused]] T&&... args,
           [[maybe_unused]] const slns::source_location& location =
                   slns::source_location::current()) {
-#if defined(NDEBUG) && !defined(OXEN_LOGGING_RELEASE_TRACE)
+#if defined(NDEBUG) && !defined(SISPOP_LOGGING_RELEASE_TRACE)
         // Using [[maybe_unused]] on the *first* ctor argument breaks gcc 8/9
         (void)cat_logger;
 #else
@@ -301,4 +301,4 @@ void add_sink(spdlog::sink_ptr, std::optional<std::string> pattern = std::nullop
 /// `add_sink` is called after this, logging output will not go anywhere.
 void clear_sinks();
 
-}  // namespace oxen::log
+}  // namespace sispop::log

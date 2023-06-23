@@ -6,13 +6,13 @@
 #include "source_location.hpp"
 #include "level.hpp"
 
-namespace oxen::log {
+namespace sispop::log {
 
 using logger_ptr = std::shared_ptr<spdlog::logger>;
 
 }
 
-namespace oxen::log::detail {
+namespace sispop::log::detail {
 
 /** internal */
 
@@ -20,13 +20,13 @@ spdlog::sink_ptr make_sink(Type type, const std::string& file);
 
 bool is_ansicolor_sink(const spdlog::sink_ptr& sink);
 
-#ifndef OXEN_LOGGING_SOURCE_ROOTS_LEN
-#define OXEN_LOGGING_SOURCE_ROOTS_LEN 0
+#ifndef SISPOP_LOGGING_SOURCE_ROOTS_LEN
+#define SISPOP_LOGGING_SOURCE_ROOTS_LEN 0
 #endif
 
-inline constexpr std::array<std::string_view, OXEN_LOGGING_SOURCE_ROOTS_LEN> source_prefixes = {
-#ifdef OXEN_LOGGING_SOURCE_ROOTS
-        OXEN_LOGGING_SOURCE_ROOTS,
+inline constexpr std::array<std::string_view, SISPOP_LOGGING_SOURCE_ROOTS_LEN> source_prefixes = {
+#ifdef SISPOP_LOGGING_SOURCE_ROOTS
+        SISPOP_LOGGING_SOURCE_ROOTS,
 #endif
 };
 
@@ -51,4 +51,4 @@ inline void make_lc(std::string& s) {
             c += 'a' - 'A';
 }
 
-}  // namespace oxen::log::detail
+}  // namespace sispop::log::detail

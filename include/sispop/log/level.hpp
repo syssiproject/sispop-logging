@@ -5,7 +5,7 @@
 
 #include <spdlog/common.h>
 
-namespace oxen::log {
+namespace sispop::log {
 
 using Level = spdlog::level::level_enum;
 
@@ -23,4 +23,4 @@ std::string_view to_string(Level lvl);
 /// - "none" or "off"
 Level level_from_string(std::string level);
 
-}  // namespace oxen::log
+}  // namespace sispop::log

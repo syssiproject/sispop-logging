@@ -8,7 +8,7 @@
 #include "internal.hpp"
 #include "level.hpp"
 
-namespace oxen::log {
+namespace sispop::log {
 
 /// Wrapper class for a categorized logger.  This wrapper is provided rather than using a direct
 /// logger_ptr because, in some cases, we need construction to happen during static initialization,
@@ -71,4 +71,4 @@ namespace detail {
 
 }
 
-}  // namespace oxen::log
+}  // namespace sispop::log

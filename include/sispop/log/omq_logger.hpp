@@ -3,10 +3,10 @@
 #include "ring_buffer_sink.hpp"
 
 #include <spdlog/spdlog.h>
-#include <oxenmq/pubsub.h>
-#include <oxenmq/oxenmq.h>
+#include <sispopmq/pubsub.h>
+#include <sispopmq/sispopmq.h>
 
-namespace oxen::log {
+namespace sispop::log {
 
 using namespace std::literals;
 
@@ -14,20 +14,20 @@ using namespace std::literals;
 /**
  * A class for sending logs via RPC subscription
  *
- * Construct with a RingBufferSink which is registered with oxen::logging
- * and a reference to the OxenMQ object used for RPC.
+ * Construct with a RingBufferSink which is registered with sispop::logging
+ * and a reference to the SispopMQ object used for RPC.
  *
- * *** The OxenMQ reference must remain valid for the lifetime of this class! ***
+ * *** The SispopMQ reference must remain valid for the lifetime of this class! ***
  */
 class PubsubLogger
 {
-    oxenmq::OxenMQ& omq;
+    sispopmq::SispopMQ& omq;
     const std::shared_ptr<RingBufferSink> buffer;
-    oxenmq::Subscription<std::string> subs;
+    sispopmq::Subscription<std::string> subs;
 
 public:
     PubsubLogger() = delete;
-    PubsubLogger(oxenmq::OxenMQ& _omq,
+    PubsubLogger(sispopmq::SispopMQ& _omq,
             std::shared_ptr<RingBufferSink> _buffer,
             std::chrono::milliseconds sub_duration = 30min)
         : omq{_omq},
@@ -47,11 +47,11 @@ public:
         buffer->set_log_callback(nullptr);
     }
 
-    bool subscribe(const oxenmq::ConnectionID& conn, std::string peer_rpc_endpoint) {
+    bool subscribe(const sispopmq::ConnectionID& conn, std::string peer_rpc_endpoint) {
         return subs.subscribe(conn, std::move(peer_rpc_endpoint));
     }
 
-    bool unsubscribe(const oxenmq::ConnectionID& conn) {
+    bool unsubscribe(const sispopmq::ConnectionID& conn) {
         return subs.unsubscribe(conn).has_value();
     }
 
@@ -59,12 +59,12 @@ public:
         subs.remove_expired();
     }
 
-    void send_all(const oxenmq::ConnectionID& conn, const std::string& endpoint)
+    void send_all(const sispopmq::ConnectionID& conn, const std::string& endpoint)
     {
-        omq.send(conn, endpoint, oxenmq::send_option::data_parts(buffer->get_all()));
+        omq.send(conn, endpoint, sispopmq::send_option::data_parts(buffer->get_all()));
     }
 };
  
-} // namespace oxen::log
+} // namespace sispop::log
 
 // vim:sw=4:et

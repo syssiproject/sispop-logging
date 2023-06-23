@@ -1,11 +1,11 @@
-#include <oxen/log/level.hpp>
-#include <oxen/log/internal.hpp>
-#include <oxen/log/format.hpp>
+#include <sispop/log/level.hpp>
+#include <sispop/log/internal.hpp>
+#include <sispop/log/format.hpp>
 #include <stdexcept>
 #include <spdlog/common.h>
 #include <string_view>
 
-namespace oxen::log {
+namespace sispop::log {
 
 std::string_view to_string(Level lvl) {
     auto l = spdlog::level::to_string_view(lvl);
@@ -23,4 +23,4 @@ Level level_from_string(std::string level) {
     throw std::invalid_argument{"Invalid log level '{}'"_format(level)};
 }
 
-}  // namespace oxen::log
+}  // namespace sispop::log

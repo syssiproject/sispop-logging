@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace oxen::log {
+namespace sispop::log {
 
 enum class Type {
     File,
@@ -18,4 +18,4 @@ Type type_from_string(std::string type);
 /// Returns the string representation of a logging type, i.e. "file", "print", or "system"
 std::string_view to_string(Type t);
 
-}  // namespace oxen::log
+}  // namespace sispop::log

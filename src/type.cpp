@@ -1,9 +1,9 @@
-#include <oxen/log/type.hpp>
-#include <oxen/log/internal.hpp>
-#include <oxen/log/format.hpp>
+#include <sispop/log/type.hpp>
+#include <sispop/log/internal.hpp>
+#include <sispop/log/format.hpp>
 #include <fmt/core.h>
 
-namespace oxen::log {
+namespace sispop::log {
 
 Type type_from_string(std::string type) {
     detail::make_lc(type);
@@ -27,4 +27,4 @@ std::string_view to_string(Type type) {
     return "unknown";
 }
 
-}  // namespace oxen::log
+}  // namespace sispop::log

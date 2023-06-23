@@ -3,7 +3,7 @@
 #include <fmt/color.h>
 #include <tuple>
 
-namespace oxen::log::detail {
+namespace sispop::log::detail {
 
 // Wraps text_style, fmt, and arguments and outputs them via fmt when formatted.  This is here so
 // that we can use styled text that *won't* go through formatting when the logging level isn't
@@ -26,11 +26,11 @@ struct text_style_wrapper {
 }
 
 template <typename... T>
-struct fmt::formatter<oxen::log::detail::text_style_wrapper<T...>> {
+struct fmt::formatter<sispop::log::detail::text_style_wrapper<T...>> {
     constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
 
     template <typename FormatContext>
-    auto format(const oxen::log::detail::text_style_wrapper<T...>& f, FormatContext& ctx)
+    auto format(const sispop::log::detail::text_style_wrapper<T...>& f, FormatContext& ctx)
     {
         auto out = ctx.out();
         return std::apply(

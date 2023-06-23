@@ -1,8 +1,8 @@
-# Oxen Logging - C++ spdlog helpers
+# Sispop Logging - C++ spdlog helpers
 
-This repository contains code for interacting with spdlog for logging from Oxen C++ program
-(oxen-core, oxen-storage-server, lokinet).  It is mostly a small amount of wrappers/functionality
-around spdlog that aids how we apply logging in Oxen core programs.
+This repository contains code for interacting with spdlog for logging from Sispop C++ program
+(sispop-core, sispop-storage-server, lokinet).  It is mostly a small amount of wrappers/functionality
+around spdlog that aids how we apply logging in Sispop core programs.
 
 Most notably what this adds around vanilla spdlog is more robust handling of log categories, and
 automatic file/line-number handling *without* needing to resort to macros.
@@ -11,10 +11,10 @@ automatic file/line-number handling *without* needing to resort to macros.
 
 ## Building
 
-Add as a subdirectory from an existing cmake project, and then link the oxen::logging cmake target
+Add as a subdirectory from an existing cmake project, and then link the sispop::logging cmake target
 into your code.  This also makes available `fmt::fmt`, `fmt::fmt-header-only`, and `spdlog::spdlog`
 targets from those projects that you can link to if you want to use fmt or spdlog somewhere that
-doesn't depend on oxen::logging.
+doesn't depend on sispop::logging.
 
 There are a few cmake settings you may wish to set; see below for details.
 
@@ -25,11 +25,11 @@ There are a few cmake settings you may wish to set; see below for details.
 Logging from code is intended to follow this pattern:
 
 ```C++
-#include <oxen/log.hpp>
+#include <sispop/log.hpp>
 
 namespace somewhere {
 
-namespace log = oxen::log;
+namespace log = sispop::log;
 
 static auto log_cat = log::Cat("xyz");
 
@@ -48,15 +48,15 @@ better fits the coding style.
 ### Initializing
 
 Before any logging actually appears the logger needs to be told where to log, typically as early as
-possible in the code, via a call to `oxen::log::add_sink`.  This is also a good place to set the
+possible in the code, via a call to `sispop::log::add_sink`.  This is also a good place to set the
 initial, default log level for early log statements as well:
 
 ```C++
-#include <oxen/log.hpp>
+#include <sispop/log.hpp>
 
 int main() {
-    oxen::log::add_sink(oxen::log::Type::Print, "stdout");
-    oxen::log::reset_level(oxen::log::Level::warn);
+    sispop::log::add_sink(sispop::log::Type::Print, "stdout");
+    sispop::log::reset_level(sispop::log::Level::warn);
     // ...
 }
 ```
@@ -69,7 +69,7 @@ logging after loading a config file).
 
 ### Log categories
 
-Oxen logger is fundamentally designed around using logging categories, which different categories
+Sispop logger is fundamentally designed around using logging categories, which different categories
 both provide some detail in the log output, and allow configuring logging to have different levels
 at different categories.
 
@@ -114,10 +114,10 @@ category logger log levels untouched.
 
 ## CMake Settings
 
-Generally you should set these using `set(OXEN_LOGGING_WHATEVER somevalue CACHE INTERNAL "")` before
-adding the oxen-logging subdirectory in your cmake parent project.
+Generally you should set these using `set(SISPOP_LOGGING_WHATEVER somevalue CACHE INTERNAL "")` before
+adding the sispop-logging subdirectory in your cmake parent project.
 
-### `OXEN_LOGGING_SOURCE_ROOT`
+### `SISPOP_LOGGING_SOURCE_ROOT`
 
 If set to the root path of your source files then that path will be stripped from the filename
 source locations that get logged.
@@ -127,7 +127,7 @@ source locations that get logged.
 If these targets already exist then they are used rather than loading fmt/spdlog from the bundled
 submodules.
 
-### `OXEN_LOGGING_FORCE_SUBMODULES`
+### `SISPOP_LOGGING_FORCE_SUBMODULES`
 
 If this is set to ON then we always load fmt/spdlog from submodules (assuming the targets are not
 already present, see above).  If off then we first look for a suitable system version to link
@@ -135,16 +135,16 @@ against, loading from submodules if we don't find one.
 
 ### `BUILD_SHARED_LIBS`
 
-This is not directly used by oxen-logger (which always builds a static library), but *is* recognized
+This is not directly used by sispop-logger (which always builds a static library), but *is* recognized
 by the fmt/spdlog submodules.
 
-### `OXEN_LOGGING_RELEASE_TRACE`
+### `SISPOP_LOGGING_RELEASE_TRACE`
 
-By default all oxen::log::trace() statements become no-ops when building in release mode (i.e. with
+By default all sispop::log::trace() statements become no-ops when building in release mode (i.e. with
 NDEBUG defined).  If you want Trace statements to be usable in a release build then you must set
 this to ON.
 
-### `OXEN_LOGGING_FMT_HEADER_ONLY`, `OXEN_LOGGING_SPDLOG_HEADER_ONLY`
+### `SISPOP_LOGGING_FMT_HEADER_ONLY`, `SISPOP_LOGGING_SPDLOG_HEADER_ONLY`
 
 If enabled (default is off) then these use fmt and spdlog, respectively, in header-only mode rather
 than compiled mode (by using the `fmt::fmt-header-only` target instead of `fmt::fmt` for fmt, and

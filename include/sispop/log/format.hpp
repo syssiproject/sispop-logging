@@ -22,20 +22,20 @@
 ///
 ///     somestr += "xyz {}"_format(42);
 ///
-/// The functions live in the `oxen::log::literals` namespace; you should use them via:
+/// The functions live in the `sispop::log::literals` namespace; you should use them via:
 ///
-///     #include <oxen/log/format.hpp>
+///     #include <sispop/log/format.hpp>
 ///     // ...
-///     using namespace oxen::log::literals;
+///     using namespace sispop::log::literals;
 ///
-/// to make them available (the header/namespace is not included by default from oxen-logging
+/// to make them available (the header/namespace is not included by default from sispop-logging
 /// headers).
 
 #include <fmt/core.h>
 #include <string_view>
 #include <iterator>
 
-namespace oxen::log {
+namespace sispop::log {
 
 namespace detail {
 
@@ -85,4 +85,4 @@ inline namespace literals {
 
 }  // namespace literals
 
-}  // namespace oxen::log
+}  // namespace sispop::log

@@ -1,8 +1,8 @@
-#include <oxen/log/catlogger.hpp>
+#include <sispop/log/catlogger.hpp>
 
 #include <spdlog/sinks/dist_sink.h>
 
-namespace oxen::log {
+namespace sispop::log {
 
 std::shared_ptr<spdlog::sinks::dist_sink_mt> master_sink =
         std::make_shared<spdlog::sinks::dist_sink_mt>();
@@ -45,4 +45,4 @@ namespace detail {
 
 }  // namespace detail
 
-}  // namespace oxen::log
+}  // namespace sispop::log

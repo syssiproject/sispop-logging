@@ -1,7 +1,7 @@
-#include <oxen/log.hpp>
-#include <oxen/log/type.hpp>
-#include <oxen/log/catlogger.hpp>
-#include <oxen/log/format.hpp>
+#include <sispop/log.hpp>
+#include <sispop/log/type.hpp>
+#include <sispop/log/catlogger.hpp>
+#include <sispop/log/format.hpp>
 
 #include <chrono>
 
@@ -16,7 +16,7 @@
 #include <spdlog/sinks/syslog_sink.h>
 #endif
 
-namespace oxen::log {
+namespace sispop::log {
 
 namespace {
 
@@ -156,4 +156,4 @@ void clear_sinks() {
     master_sink->set_sinks({});
 }
 
-}  // namespace oxen::log
+}  // namespace sispop::log

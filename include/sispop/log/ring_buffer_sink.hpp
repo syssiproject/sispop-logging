@@ -7,7 +7,7 @@
 #include <string>
 #include <functional>
 
-namespace oxen::log {
+namespace sispop::log {
 
 namespace detail {
     struct MessageList
@@ -32,7 +32,7 @@ namespace detail {
         }
     };
 
-} // namespace oxen::log::detail
+} // namespace sispop::log::detail
 
 using sink_type = spdlog::sinks::base_sink<std::mutex>;
 
@@ -71,7 +71,7 @@ public:
     void flush_() override {};
 };
  
-} // namespace oxen::log
+} // namespace sispop::log
 
 // vim:sw=4:et
 

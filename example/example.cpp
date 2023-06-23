@@ -1,11 +1,11 @@
-#include <oxen/log.hpp>
+#include <sispop/log.hpp>
 #include <fmt/color.h>
 
 int main() {
-    using namespace oxen::log;
+    using namespace sispop::log;
 
-    add_sink(oxen::log::Type::Print, "stdout");
-    add_sink(oxen::log::Type::File, "foo.log");
+    add_sink(sispop::log::Type::Print, "stdout");
+    add_sink(sispop::log::Type::File, "foo.log");
 
     auto cat_foo = Cat("foo");
     auto cat_bar = Cat("bar");
